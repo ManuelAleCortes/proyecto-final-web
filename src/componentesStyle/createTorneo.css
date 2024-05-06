@@ -1,0 +1,32 @@
+#contenedor-torneo{
+    display: flex;
+    width: 300px;
+    height: 300px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    border: 2px solid #000000;
+    border-radius: 20px;
+}
+.contenedor-title-text{
+    width: 100%;
+    display: flex;
+    
+}
+.title-nombre{
+    width: 50%;
+}
+.title-fecha{
+    width: 50%;
+}
+#imagen-banner{
+    border-radius: 20px;
+}
+#botones-bajos{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}

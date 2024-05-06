@@ -1,0 +1,76 @@
+#pagina-encabezado{
+    left: 0;   
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  #pagina-contenido{
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    
+  }
+  #pagina-contenido-contenedor{
+    padding-top: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+  }
+  #pagina-contenido-contenedor-content{
+    
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Permitir que los elementos se envuelvan en varias líneas si es necesario */
+
+  }
+  #pagina-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    
+  }
+  #form-content1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+  #form-content2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+  #form-content{
+    /*background-color: blue;*/
+    /*color: white;*/
+    border: 2px solid rgb(94, 94, 94);
+    padding: 10px;
+    border-radius: 5px;
+  }
+  #contenido-torneos{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+  }
+  #contenedor-torneos{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: start;
+    gap: 10px;
+  }
