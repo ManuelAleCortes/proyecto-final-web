@@ -1,16 +1,19 @@
 import "../componentesStyle/createTorneo.css";
 import { Link } from "react-router-dom";
-
+import { eliminarTorneo } from "../state/listaSlice";
+import { useDispatch} from 'react-redux';
 export default function CreateTorneo({dataTorneo}) {
     const { nombre, fechaLimite, imagen, cantidadMax, numPaticipantes, participantes } = dataTorneo;
     const modificar = "Modificar";
     const eliminar = "eliminar";
+    const dispatch = useDispatch();
     const handleModificar = () => {
         
     };
     const handleEliminar = () => {
-        
+        dispatch(eliminarTorneo({ nombre: nombre }));
     };
+
     return (    
         <div id="contenedor-torneo">
             <div className="contenedor-title-text">
@@ -22,7 +25,7 @@ export default function CreateTorneo({dataTorneo}) {
                 </div>
             </div>
             <div>
-                <img id="imagen-banner" src={imagen} alt={nombre} style={{ width: '125px', height: '100px' }} />
+                <img id="imagen-banner" src={imagen} alt="Imagen del torneo" style={{ width: '125px', height: '100px' }} />
             </div>
             <div className="contenedor-title-text">
                 <div className="title-nombre">

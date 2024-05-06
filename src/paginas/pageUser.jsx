@@ -1,8 +1,9 @@
 import Menu from "../componentes/menu";
 import "../componentesStyle/paginas.css";
 import TorneoUnirse from '../componentes/participateTorneo';
+import { useSelector } from 'react-redux';
 export default function PageUser() {
-  const unirse = "Participa a algun torneo";
+  const unirse = "Participa en algun torneo";
   const torneo = {
     nombre: 'La champions',
     fechaLimite: '20/07/2024',
@@ -12,7 +13,7 @@ export default function PageUser() {
     participantes: [],
   };
   //Obtener informacion de los torneos en la base de datos
-
+  const listaTorneos  = useSelector(state => state.torneos.listaTorneos);
   return (
     <>
         <header id="pagina-encabezado">
@@ -28,7 +29,9 @@ export default function PageUser() {
                 <span style={{ color: "black", fontSize: "15px", fontWeight: "bold"}}>{unirse}</span>
               </div>
               <div id="contenedor-torneos">
-                <TorneoUnirse dataTorneo={torneo}/>
+                {listaTorneos.map((torneo, index) => (
+                         <TorneoUnirse key={index} dataTorneo={torneo} />
+                ))}
               </div>
             </div>
           </div>

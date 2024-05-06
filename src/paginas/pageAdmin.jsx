@@ -1,6 +1,9 @@
 import Menu from "../componentes/menu";
+import React, { useState } from 'react';
 import "../componentesStyle/paginas.css";
 import TorneoCreado from '../componentes/createTorneo';
+import FormularioTorneo from '../componentes/formularioTorneo';
+import { useSelector } from 'react-redux';
 export default function PageAdmin() {
   const crear = "Crear un torneo";
   const torneo = {
@@ -11,11 +14,17 @@ export default function PageAdmin() {
     numPaticipantes: 0,
     participantes: [],
   };
-  //Obtener informacion de los torneos en la base de datos
-    const handleCrearTorneo = () => {
-        
+    const [modalVisible, setModalVisible] = useState(false);
+
+    const openModal = () => {
+      setModalVisible(true);
     };
-    
+  
+    const closeModal = () => {
+      setModalVisible(false);
+    };
+
+    const listaTorneos  = useSelector(state => state.torneos.listaTorneos);
     return (
     <>
         <header id="pagina-encabezado">
@@ -27,15 +36,15 @@ export default function PageAdmin() {
         <div id="pagina-contenido">
           <div id="pagina-contenido-contenedor">
           <div id="contenido-torneos">
-              <button id="boton-crear" onClick={handleCrearTorneo}>
+              <button id="boton-crear" onClick={openModal}>
                 <span style={{ color: "black", fontSize: "15px", fontWeight: "bold"}}>{crear}</span>
               </button>
+              {modalVisible && <FormularioTorneo onClose={closeModal} />}
               <div id="contenedor-torneos">
-                <TorneoCreado dataTorneo={torneo}/>
-                <TorneoCreado dataTorneo={torneo}/>
-                <TorneoCreado dataTorneo={torneo}/>
-                <TorneoCreado dataTorneo={torneo}/>
-                <TorneoCreado dataTorneo={torneo}/>
+
+                {listaTorneos.map((torneo, index) => (
+                         <TorneoCreado key={index} dataTorneo={torneo} />
+                ))}
               </div>
             </div>
           </div>

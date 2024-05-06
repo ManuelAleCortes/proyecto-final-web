@@ -18,7 +18,7 @@ export default function ParticipateTorneo({dataTorneo}) {
                 </div>
             </div>
             <div>
-                <img id="imagen-banner" src={imagen} alt={nombre} style={{ width: '125px', height: '100px' }} />
+                <img id="imagen-banner" src={imagen} alt="Imagen del torneo" style={{ width: '125px', height: '100px' }} />
             </div>
             <div className="contenedor-title-text">
                 <div className="title-nombre">
