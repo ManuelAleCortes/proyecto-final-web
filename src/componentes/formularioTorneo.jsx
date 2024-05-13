@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import "../componentesStyle/paginas.css";
-import { agregarTorneo } from "../state/listaSlice";
+//import { agregarTorneo } from "../state/listaSlice";
 import { useDispatch} from 'react-redux';
-
+import { app, auth, dataBase, imageDb} from '../baseDatos/fireBase';
+import { ref, uploadBytes , getDownloadURL} from 'firebase/storage';
+import { addTorneo, obtenerTodosLosTorneos } from "../baseDatos/metodos";
 export default function FormularioTorneo({ onClose }) {
     const dispatch = useDispatch();
     
     const [nombre, setNombre] = useState('');
     const [fechaLimite, setFechaLimite] = useState('');
     const [imagen, setImagen] = useState(null);
+    //const [imagenUrl, setImagenUrl] = useState(null);
     const [cantidadMax, setCantidadMax] = useState(0);
     const [error, setError] = useState('');
     //const [numPaticipantes, setNumParticipantes] = useState(0);
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         if (nombre.length < 3 || nombre.length > 15) {
             setError('El nombre del torneo debe tener entre 3 y 15 caracteres');
@@ -23,26 +26,44 @@ export default function FormularioTorneo({ onClose }) {
             setError('Todos los campos son obligatorios');
             return;
           }
-        
-        const nuevoTorneo = {
-          nombre,
-          fechaLimite,
-          imagen: imagen ? URL.createObjectURL(imagen) : null,
-          cantidadMax,
-          numPaticipantes:0,
-          participantes: [], // Inicialmente no hay participantes
-        };
-        dispatch(agregarTorneo(nuevoTorneo));
-        // Restablecer los campos del formulario después de enviar
-        setNombre('');
-        setFechaLimite('');
-        setImagen(null);
-        setCantidadMax(0);
-        setError('');
+
+          try{
+            let imagenUrl = null;
+            if (imagen) {
+              const storageRef = ref(imageDb,`files/${imagen.name}`);
+              const snapshot = await uploadBytes(storageRef, imagen);
+              imagenUrl = await getDownloadURL(snapshot.ref);
+              
+            }else{
+              return;
+            }
+          const nuevoTorneo = {
+            nombre,
+            fechaLimite,
+            imagen: imagenUrl,
+            cantidadMax,
+            numPaticipantes:0,
+            participantes: [], // Inicialmente no hay participantes
+          };
+          await addTorneo(dataBase,nuevoTorneo);
+          //await dispatch(agregarTorneo(nuevoTorneo));
+
+          // Después de agregar el torneo, obtener la lista actualizada
+          dispatch(obtenerTodosLosTorneos());
+          // Restablecer los campos del formulario después de enviar
+          setNombre('');
+          setFechaLimite('');
+          setImagen(null);
+          setCantidadMax(0);
+          setError('');
+        }catch(error){
+          console.error('Error al subir la imagen:', error);
+        }
       };
-      const handleImagenChange = (event) => {
-        const file = event.target.files[0]; // Solo se toma el primer archivo si el usuario selecciona varios
-        setImagen(file);
+      const handleImagenChange = (e) => {
+        const imagenSeleccionada = e.target.files[0]; // Obtén el archivo de imagen seleccionado por el usuario
+        setImagen(imagenSeleccionada);
+        //console.log(imagenSeleccionada);
       };
   return (
     <div className="modal-overlay">

@@ -1,49 +1,51 @@
 import React, { useState } from 'react';
 import Menu from "../componentes/menu";
 import "../componentesStyle/paginas.css";
-import { fetchSignInMethodsForEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
-import { app, auth, database} from '../baseDatos/fireBase';
+import { app, auth, dataBase} from '../baseDatos/fireBase';
 import PageUser from './pageUser';
 import {useSubmit, Form} from "react-router-dom";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { getDoc, doc } from 'firebase/firestore';
+import { actualizarUsuario } from "../state/listaSlice";
+import { useDispatch} from 'react-redux';
 
 export default function Login() {
-
-
-  const [role, setRole] = useState('usuario');
-  const handleRoleChange = (event) => {
-    setRole(event.target.value);
-  };
-  const navigate = useNavigate();
-
-  const submitHandler = (e) => {
-    e.preventDefaul();
+  const dispatch = useDispatch();
+  const submitHandler = async (e) => {
+    e.preventDefault();
       const correo = e.target.emailField.value;
       const password = e.target.passwordField.value;
-      fetchSignInMethodsForEmail(auth, correo)
-          .then((signInMethods) => {
-          if (signInMethods.length === 0) {
-              // Si signInMethods.length es 0, significa que no hay una cuenta asociada con el correo electrónico
-              console.log('No hay cuenta asociada con este correo electrónico.');
-              navigate('/page');
-              // Aquí podrías redirigir al usuario a una página de registro o mostrar un mensaje de error
+      try{
+        const userCredential = await signInWithEmailAndPassword(auth,correo,password);
+        const user = userCredential.user;
+        if (user) {
+          // Obtener el rol del usuario desde Firestore
+          const userDoc = await getDoc(doc(dataBase, "Users", user.uid));
+          const userData = userDoc.data();
+          
+          if (userData) {
+            const { rol, email } = userData;
+            // Redirigir basado en el rol del usuario
+            
+            if (rol === "administrador") {
+              window.location.href = "/administrador";
+            } else {
+              window.location.href = "/usuario";
+            }
+          
           } else {
-              // Si hay métodos de inicio de sesión disponibles, intenta iniciar sesión con el correo electrónico y la contraseña proporcionados
-              signInWithEmailAndPassword(auth, correo, password)
-              .then((userCredential) => {
-                  // Usuario autenticado correctamente
-                  console.log('Usuario autenticado:', userCredential);
-                  // Aquí podrías redirigir al usuario a la otra página
-
-                })
-          .catch((error) => {
-            // Error al iniciar sesión
-            console.error('Error al iniciar sesión:', error);
-            // Aquí podrías mostrar un mensaje de error al usuario
-          });
+            // Manejar el caso en que no se encuentre información del usuario en Firestore
+            console.log("No se encontró información del usuario en Firestore");
           }
-      })
+        }else{
+
+        }
+      }catch(error){
+        //console.log(error);
+      }
+
     };
     return (
     <>
@@ -65,26 +67,7 @@ export default function Login() {
                           <label htmlFor="passwordField">contraseña</label>
                           <input type="password" id="passwordField"/>
                       </div>
-                      <div id="form-content3">
-                      <label>
-                        <input
-                          type="radio"
-                          value="usuario"
-                          checked={role === 'usuario'}
-                          onChange={handleRoleChange}
-                        />
-                        Usuario
-                      </label>
-                      <label>
-                        <input
-                          type="radio"
-                          value="administrador"
-                          checked={role === 'administrador'}
-                          onChange={handleRoleChange}
-                        />
-                        Administrador
-                      </label>
-                    </div>
+
                   <button type="submit">Iniciar sesión</button>
                   
               </form>

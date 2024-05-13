@@ -7,6 +7,7 @@ export default function ParticipateTorneo({dataTorneo}) {
     const handleParticipar = () => {
         
     };
+    
     return (    
         <div id="contenedor-torneo">
             <div className="contenedor-title-text">

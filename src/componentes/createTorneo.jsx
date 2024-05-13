@@ -1,17 +1,21 @@
 import "../componentesStyle/createTorneo.css";
 import { Link } from "react-router-dom";
-import { eliminarTorneo } from "../state/listaSlice";
+//import { eliminarTorneo } from "../state/listaSlice";
 import { useDispatch} from 'react-redux';
+import { removeTorneo, obtenerTodosLosTorneos } from "../baseDatos/metodos";
+import { dataBase } from "../baseDatos/fireBase";
 export default function CreateTorneo({dataTorneo}) {
-    const { nombre, fechaLimite, imagen, cantidadMax, numPaticipantes, participantes } = dataTorneo;
+    const { nombre, fechaLimite, imagen, cantidadMax, numPaticipantes, participantes, id } = dataTorneo;
     const modificar = "Modificar";
     const eliminar = "eliminar";
     const dispatch = useDispatch();
     const handleModificar = () => {
         
     };
-    const handleEliminar = () => {
-        dispatch(eliminarTorneo({ nombre: nombre }));
+    const handleEliminar = async () => {
+        //await dispatch(eliminarTorneo({ id: id }));
+        await removeTorneo(dataBase, id, imagen);
+        dispatch(obtenerTodosLosTorneos());
     };
 
     return (    

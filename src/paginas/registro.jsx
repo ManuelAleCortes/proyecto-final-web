@@ -2,26 +2,37 @@ import React, { useState } from 'react';
 import Menu from "../componentes/menu";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import "../componentesStyle/paginas.css";
-import { app, auth, database} from '../baseDatos/fireBase';
+import { app, auth, dataBase} from '../baseDatos/fireBase';
 import {Form} from "react-router-dom";
-
+import { setDoc, doc } from 'firebase/firestore';
 export default function Registro() {
   const [role, setRole] = useState('usuario');
+
   const handleRoleChange = (event) => {
     setRole(event.target.value);
   };
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const correo = e.target.emailField.value;
-    const password = e.target.passwordField.value;
-    console.log(correo,password);
-    createUserWithEmailAndPassword(auth,correo,password).then((userCredential) =>{
-        console.log(userCredential);
-    }).catch((error)=>{
-        console.log(error);
-    })
-    };
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+  const correo = e.target.emailField.value;
+  const password = e.target.passwordField.value;
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, correo, password);
+    const user = userCredential.user;
+    console.log(user);
+
+    if (user) {
+      await setDoc(doc(dataBase, "Users", user.uid), {
+        email: user.email,
+        rol: role,
+      });
+    }
+    // Despacha la acción después de completar la llamada a Firebase
+    console.log("Usuario registrado con exito")
+  } catch (error) {
+    console.log(error);
+  }
+    };
 
     return (
     <>
