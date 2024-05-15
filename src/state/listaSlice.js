@@ -14,37 +14,6 @@ const torneosSlice = createSlice({
       rol: null,
     },
     reducers: {
-      /*
-       agregarTorneo: async (state, action) => {
-        //Crear añadir un objeto a la lista
-        
-        const { nombre, fechaLimite, imagen, cantidadMax,numPaticipantes, participantes } = action.payload;
-        try {
-          const docRef = await addDoc(collection(dataBase, "Torneos"), {
-            nombre: nombre,
-            fechaLimite: fechaLimite,
-            imagen: imagen,
-            cantidadMax: cantidadMax,
-            numPaticipantes: numPaticipantes,
-            participantes: participantes,
-          });
-          
-           await updateDoc(docRef, {
-            id: docRef.id
-          });
-          //console.log("Document written with ID: ", docRef.id);
-          
-        } catch (e) {
-          console.error("Error adding document: ", e);
-        }
-      },
-      eliminarTorneo:   (state, action) => {
-        //Eliminar remover un objeto de la lista
-        const { id } = action.payload;
-        const docRef = doc(dataBase, "Torneos", id);
-       deleteDoc(docRef)
-      },
-      */
       actualizarUsuario: (state, action) => {
         const { email, rol } = action.payload;
         
@@ -55,7 +24,6 @@ const torneosSlice = createSlice({
         };
       },
       desactualizarUsuario: (state, action) => {
-        //Eliminar remover un objeto de la lista
         state.email = null;
         state.rol = null;
       },

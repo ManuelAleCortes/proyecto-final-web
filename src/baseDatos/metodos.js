@@ -1,5 +1,5 @@
 
-import {collection, getDocs,addDoc, doc, updateDoc, deleteDoc, where, query } from "firebase/firestore";
+import {collection, getDocs,addDoc, doc, updateDoc, deleteDoc, where, query, getDoc } from "firebase/firestore";
 import { app, auth, dataBase, imageDb} from '../baseDatos/fireBase';
 import { actualizarListaTorneos } from "../state/listaSlice";
 import { deleteObject, ref } from "firebase/storage";
@@ -18,14 +18,14 @@ import { deleteObject, ref } from "firebase/storage";
 };
 async function addTorneo(dataBase, nuevoTorneo) {
   //Crear añadir un objeto a la lista
-  const { nombre, fechaLimite, imagen, cantidadMax,numPaticipantes, participantes } = nuevoTorneo;
+  const { nombre, fechaLimite, imagen, cantidadMax,numParticipantes, participantes } = nuevoTorneo;
   try {
     const docRef = await addDoc(collection(dataBase, "Torneos"), {
       nombre: nombre,
       fechaLimite: fechaLimite,
       imagen: imagen,
       cantidadMax: cantidadMax,
-      numPaticipantes: numPaticipantes,
+      numParticipantes: numParticipantes,
       participantes: participantes,
     });
     
@@ -54,4 +54,67 @@ async function removeTorneo(dataBase, id, imagen) {
       //throw error; // Propaga el error para que pueda ser manejado por quien llama a esta función
   }
 }
-export { obtenerTodosLosTorneos, addTorneo,removeTorneo };
+
+async function agregarParticipanteTorneo(dataBase, id, email,numParticipantes) {
+  try {
+    // Obtener una referencia al documento del torneo
+    const torneoRef = doc(dataBase, 'Torneos', id);
+
+    // Obtener los datos actuales del documento
+    const torneoDoc = await getDoc(torneoRef);
+    if (torneoDoc.exists()) {
+      // Obtener el array de participantes actual
+      const participantesActuales = torneoDoc.data().participantes || [];
+
+      // Agregar el nuevo participante al array
+      participantesActuales.push(email);
+
+      // Incrementar el número de participantes
+      const nuevoNumeroDeParticipantes = numParticipantes + 1;
+
+      // Actualizar el documento en Firestore con el nuevo array de participantes
+      await updateDoc(torneoRef, { participantes: participantesActuales, numParticipantes: nuevoNumeroDeParticipantes  });
+
+      //console.log(`El participante ${email} ha sido agregado al torneo.`);
+    } else {
+      //console.error('No se encontró el documento del torneo.');
+    }
+  } catch (error) {
+    //console.error('Error al agregar participante al torneo:', error);
+  }
+}
+async function eliminarParticipanteTorneo(dataBase, id, email,numParticipantes) {
+  try {
+    // Obtener una referencia al documento del torneo
+    const torneoRef = doc(dataBase, 'Torneos', id);
+
+    // Obtener los datos actuales del documento
+    const torneoDoc = await getDoc(torneoRef);
+    if (torneoDoc.exists()) {
+      // Obtener el array de participantes actual
+      let participantesActuales = torneoDoc.data().participantes || [];
+
+      // Verificar si el nombre del participante está en el array
+      const index = participantesActuales.indexOf(email);
+      if (index !== -1) {
+        // Eliminar el nombre del participante del array
+        participantesActuales.splice(index, 1);
+
+        // Decrementar el número de participantes
+        const nuevoNumeroDeParticipantes = numParticipantes - 1;
+
+        // Actualizar el documento en Firestore con el nuevo array de participantes
+        await updateDoc(torneoRef, { participantes: participantesActuales, numParticipantes: nuevoNumeroDeParticipantes  });
+
+        //console.log(`El participante ${email} ha sido eliminado del torneo.`);
+      } else {
+        //console.error(`El participante ${email} no está registrado en el torneo.`);
+      }
+    } else {
+      //console.error('No se encontró el documento del torneo.');
+    }
+  } catch (error) {
+    //console.error('Error al eliminar participante del torneo:', error);
+  }
+}
+export { obtenerTodosLosTorneos, addTorneo,removeTorneo, agregarParticipanteTorneo, eliminarParticipanteTorneo };

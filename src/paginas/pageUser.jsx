@@ -17,7 +17,7 @@ export default function PageUser() {
     fechaLimite: '20/07/2024',
     imagen: 'https://i.pinimg.com/736x/48/9a/1a/489a1ac03e48d69fafbb399e5c8d908c.jpg',
     cantidadMax: 8,
-    numPaticipantes: 0,
+    numParticipantes: 0,
     participantes: [],
   };
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ export default function PageUser() {
   const rol = useSelector((state) => state.torneos.rol);
   useEffect(()=>{
     fetchUserData();
-    console.log(email);
+    //console.log(email);
   },[])
 
   async function handleLogout(){

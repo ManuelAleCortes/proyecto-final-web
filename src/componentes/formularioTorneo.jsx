@@ -14,7 +14,7 @@ export default function FormularioTorneo({ onClose }) {
     //const [imagenUrl, setImagenUrl] = useState(null);
     const [cantidadMax, setCantidadMax] = useState(0);
     const [error, setError] = useState('');
-    //const [numPaticipantes, setNumParticipantes] = useState(0);
+    //const [numParticipantes, setNumParticipantes] = useState(0);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -42,7 +42,7 @@ export default function FormularioTorneo({ onClose }) {
             fechaLimite,
             imagen: imagenUrl,
             cantidadMax,
-            numPaticipantes:0,
+            numParticipantes:0,
             participantes: [], // Inicialmente no hay participantes
           };
           await addTorneo(dataBase,nuevoTorneo);

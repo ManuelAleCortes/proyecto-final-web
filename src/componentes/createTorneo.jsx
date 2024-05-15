@@ -5,7 +5,7 @@ import { useDispatch} from 'react-redux';
 import { removeTorneo, obtenerTodosLosTorneos } from "../baseDatos/metodos";
 import { dataBase } from "../baseDatos/fireBase";
 export default function CreateTorneo({dataTorneo}) {
-    const { nombre, fechaLimite, imagen, cantidadMax, numPaticipantes, participantes, id } = dataTorneo;
+    const { nombre, fechaLimite, imagen, cantidadMax, numParticipantes, participantes, id } = dataTorneo;
     const modificar = "Modificar";
     const eliminar = "eliminar";
     const dispatch = useDispatch();
@@ -36,7 +36,7 @@ export default function CreateTorneo({dataTorneo}) {
                     <span style={{ color: "black", fontSize: "13px", fontWeight: "bold"}}>{`Cantidad maxmima de participantes: ${cantidadMax}`}</span>
                 </div>
                 <div className="title-fecha">
-                    <span style={{ color: "black", fontSize: "13px", fontWeight: "bold"}}>{`Numero de participantes actuales: ${numPaticipantes}`}</span>
+                    <span style={{ color: "black", fontSize: "13px", fontWeight: "bold"}}>{`Numero de participantes actuales: ${numParticipantes}`}</span>
                 </div>
             </div>
             <div id="botones-bajos">
