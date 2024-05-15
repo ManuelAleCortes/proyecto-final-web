@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import Menu from "../componentes/menu";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import "../componentesStyle/paginas.css";
-import { app, auth, dataBase} from '../baseDatos/fireBase';
-import {Form} from "react-router-dom";
+import { auth, dataBase} from '../baseDatos/fireBase';
 import { setDoc, doc } from 'firebase/firestore';
 export default function Registro() {
   const [role, setRole] = useState('usuario');
@@ -19,7 +18,7 @@ export default function Registro() {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, correo, password);
     const user = userCredential.user;
-    console.log(user);
+    //console.log(user);
 
     if (user) {
       await setDoc(doc(dataBase, "Users", user.uid), {
@@ -28,7 +27,7 @@ export default function Registro() {
       });
     }
     // Despacha la acción después de completar la llamada a Firebase
-    console.log("Usuario registrado con exito")
+    //console.log("Usuario registrado con exito")
   } catch (error) {
     console.log(error);
   }

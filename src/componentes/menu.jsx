@@ -2,8 +2,8 @@ import "../componentesStyle/menu.css";
 import { Link } from "react-router-dom";
 
 export default function Menu(props) {
-    const usuario = "/usuario";
-    const administrador = "/administrador";
+    //const usuario = "/usuario";
+    //const administrador = "/administrador";
     return (
         <div id="contenedor-title">
             <div id="contenedor-title-text">
@@ -15,20 +15,6 @@ export default function Menu(props) {
                     <button>
                         <div id="title-text">
                             <span style={{ color: "black", fontSize: "13px", fontWeight: "bold"}}>{props.titulo}</span>
-                        </div>
-                    </button>
-                </Link>
-                <Link to={usuario}>
-                    <button>
-                        <div id="title-text">
-                            <span style={{ color: "black", fontSize: "13px", fontWeight: "bold"}}>Ir a usuario</span>
-                        </div>
-                    </button>
-                </Link>
-                <Link to={administrador}>
-                    <button>
-                        <div id="title-text">
-                            <span style={{ color: "black", fontSize: "13px", fontWeight: "bold"}}>ir a administrador</span>
                         </div>
                     </button>
                 </Link>

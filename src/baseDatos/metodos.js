@@ -1,6 +1,6 @@
 
-import {collection, getDocs,addDoc, doc, updateDoc, deleteDoc, where, query, getDoc } from "firebase/firestore";
-import { app, auth, dataBase, imageDb} from '../baseDatos/fireBase';
+import { collection, getDocs,addDoc, doc, updateDoc, deleteDoc, getDoc } from "firebase/firestore";
+import { dataBase, imageDb} from '../baseDatos/fireBase';
 import { actualizarListaTorneos } from "../state/listaSlice";
 import { deleteObject, ref } from "firebase/storage";
  const obtenerTodosLosTorneos = () => async (dispatch) => {
@@ -52,9 +52,28 @@ async function removeTorneo(dataBase, id, imagen) {
     } catch (error) {
       console.error("Error al eliminar usuario:", error);
       //throw error; // Propaga el error para que pueda ser manejado por quien llama a esta función
+    }
+}
+async function updateTorneo(dataBase, idTorneo, updateTorneo) {
+  const { nombre, fechaLimite, imagen, cantidadMax } = updateTorneo;
+  try {
+    // Obtener una referencia al documento del torneo
+    const torneoRef = doc(dataBase, 'Torneos', idTorneo);
+
+    // Actualizar el documento en Firestore con los nuevos datos
+    await updateDoc(torneoRef, {
+      nombre: nombre,
+      fechaLimite: fechaLimite,
+      imagen: imagen,
+      cantidadMax: cantidadMax
+      // Puedes agregar aquí otros campos que desees actualizar
+    });
+
+    //console.log("El torneo ha sido actualizado correctamente.");
+  } catch (error) {
+    console.error("Error al actualizar el documento del torneo: ", error);
   }
 }
-
 async function agregarParticipanteTorneo(dataBase, id, email,numParticipantes) {
   try {
     // Obtener una referencia al documento del torneo
@@ -117,4 +136,4 @@ async function eliminarParticipanteTorneo(dataBase, id, email,numParticipantes) 
     //console.error('Error al eliminar participante del torneo:', error);
   }
 }
-export { obtenerTodosLosTorneos, addTorneo,removeTorneo, agregarParticipanteTorneo, eliminarParticipanteTorneo };
+export { obtenerTodosLosTorneos, addTorneo,removeTorneo, agregarParticipanteTorneo, eliminarParticipanteTorneo,updateTorneo };

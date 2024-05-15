@@ -4,7 +4,7 @@ import "../componentesStyle/paginas.css";
 import TorneoCreado from '../componentes/createTorneo';
 import FormularioTorneo from '../componentes/formularioTorneo';
 import { useSelector } from 'react-redux';
-import { app, auth, dataBase} from '../baseDatos/fireBase';
+import { auth, dataBase} from '../baseDatos/fireBase';
 import { getDoc, doc } from 'firebase/firestore';
 import { useDispatch} from 'react-redux';
 import { actualizarUsuario  } from "../state/listaSlice";
@@ -13,14 +13,7 @@ import { obtenerTodosLosTorneos } from "../baseDatos/metodos";
 export default function PageAdmin() {
   const dispatch = useDispatch();
   const crear = "Crear un torneo";
-  const torneo = {
-    nombre: 'La champions',
-    fechaLimite: '20/07/2024',
-    imagen: 'https://i.pinimg.com/736x/48/9a/1a/489a1ac03e48d69fafbb399e5c8d908c.jpg',
-    cantidadMax: 8,
-    numPaticipantes: 0,
-    participantes: [],
-  };
+
     const [modalVisible, setModalVisible] = useState(false);
 
     const openModal = () => {
@@ -33,7 +26,7 @@ export default function PageAdmin() {
 
     const listaTorneos  = useSelector(state => state.torneos.listaTorneos);
 
-    const fetchUserData = async () => {
+    const fetchUserData = async (dispatch) => {
       auth.onAuthStateChanged(async(user) =>{
         try{
   
@@ -47,16 +40,16 @@ export default function PageAdmin() {
           
           dispatch(actualizarUsuario(({rol, email})));
         }else{
-          console.log("El usuario no esta logeado")
+          //console.log("El usuario no esta logeado")
         }
         }catch(error){
-          console.log("No poseé una cuenta",error)
+          //console.log("No poseé una cuenta",error)
         }
       })
     };
     useEffect(()=>{
-      fetchUserData();
-    },[])
+      fetchUserData(dispatch);
+    },[dispatch])
     useEffect(() => {
       dispatch(obtenerTodosLosTorneos());
     }, [dispatch]);

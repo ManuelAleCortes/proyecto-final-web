@@ -1,17 +1,26 @@
 import "../componentesStyle/createTorneo.css";
-import { Link } from "react-router-dom";
 //import { eliminarTorneo } from "../state/listaSlice";
 import { useDispatch} from 'react-redux';
 import { removeTorneo, obtenerTodosLosTorneos } from "../baseDatos/metodos";
+import ActualizarTorneo from '../componentes/actualizarTorneo';
 import { dataBase } from "../baseDatos/fireBase";
+import { useState } from "react";
 export default function CreateTorneo({dataTorneo}) {
-    const { nombre, fechaLimite, imagen, cantidadMax, numParticipantes, participantes, id } = dataTorneo;
+    //const { nombre, fechaLimite, imagen, cantidadMax, numParticipantes, participantes, id } = dataTorneo;
+    const { nombre, fechaLimite, imagen, cantidadMax, numParticipantes, id } = dataTorneo;
+    const [modalVisible, setModalVisible] = useState(false);
+
+    const openModal = () => {
+      setModalVisible(true);
+    };
+  
+    const closeModal = () => {
+      setModalVisible(false);
+    };
+
     const modificar = "Modificar";
     const eliminar = "eliminar";
     const dispatch = useDispatch();
-    const handleModificar = () => {
-        
-    };
     const handleEliminar = async () => {
         //await dispatch(eliminarTorneo({ id: id }));
         await removeTorneo(dataBase, id, imagen);
@@ -40,9 +49,10 @@ export default function CreateTorneo({dataTorneo}) {
                 </div>
             </div>
             <div id="botones-bajos">
-                <button id="boton-agregar" onClick={handleModificar}>
+                <button id="boton-agregar" onClick={openModal}>
                     <span style={{ color: "black", fontSize: "15px", fontWeight: "bold"}}>{modificar}</span>
                 </button>
+                {modalVisible && <ActualizarTorneo onClose={closeModal} dataTorneo={dataTorneo} />}
                 <button id="boton-agregar" onClick={handleEliminar}>
                     <span style={{ color: "black", fontSize: "15px", fontWeight: "bold"}}>{eliminar}</span>
                 </button>

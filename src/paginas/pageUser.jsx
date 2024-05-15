@@ -2,7 +2,7 @@ import Menu from "../componentes/menu";
 import "../componentesStyle/paginas.css";
 import TorneoUnirse from '../componentes/participateTorneo';
 import { useSelector } from 'react-redux';
-import { app, auth, dataBase} from '../baseDatos/fireBase';
+import { auth, dataBase} from '../baseDatos/fireBase';
 import { getDoc, doc } from 'firebase/firestore';
 import { useDispatch} from 'react-redux';
 import { actualizarUsuario  } from "../state/listaSlice";
@@ -12,19 +12,11 @@ import { obtenerTodosLosTorneos } from "../baseDatos/metodos";
 import React from 'react'
 export default function PageUser() {
   const unirse = "Participa en algun torneo";
-  const torneo = {
-    nombre: 'La champions',
-    fechaLimite: '20/07/2024',
-    imagen: 'https://i.pinimg.com/736x/48/9a/1a/489a1ac03e48d69fafbb399e5c8d908c.jpg',
-    cantidadMax: 8,
-    numParticipantes: 0,
-    participantes: [],
-  };
   const dispatch = useDispatch();
   //Obtener informacion de los torneos en la base de datos
   const listaTorneos  = useSelector(state => state.torneos.listaTorneos);
   //const [userDetails, set]
-  const fetchUserData = async () => {
+  const fetchUserData = async (dispatch) => {
     auth.onAuthStateChanged(async(user) =>{
       try{
 
@@ -38,7 +30,7 @@ export default function PageUser() {
         
         dispatch(actualizarUsuario(({rol, email})));
       }else{
-        console.log("El usuario no esta logeado")
+        //console.log("El usuario no esta logeado")
       }
       }catch(error){
         console.log("No poseé una cuenta",error)
@@ -51,9 +43,9 @@ export default function PageUser() {
   const email = useSelector((state) => state.torneos.email);
   const rol = useSelector((state) => state.torneos.rol);
   useEffect(()=>{
-    fetchUserData();
+    fetchUserData(dispatch);
     //console.log(email);
-  },[])
+  },[dispatch])
 
   async function handleLogout(){
     await auth.signOut();
