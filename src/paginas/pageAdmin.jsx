@@ -61,21 +61,23 @@ export default function PageAdmin() {
     const email = useSelector((state) => state.torneos.email);
     const rol = useSelector((state) => state.torneos.rol);
     return (
-    <div>
+    <div id="pagina-admin">
         <header id="pagina-encabezado">
           <div>
-            <Menu titulo="Login" direccion="/login" nombre="Página de administrador"/>
+            <Menu titulo="Login" direccion="/administrador" nombre="Página de administrador"/>
           </div>
           
         </header>
         {(email && rol === "administrador") ? (
           <>
-        <div id="pagina-contenido">
-          <div id="pagina-contenido-contenedor">
+        <div id="pagina-contenido-admin">
+          <div id="pagina-contenido-contenedor-admin">
           <div id="contenido-torneos">
               <button id="boton-crear" onClick={openModal}>
                 <span style={{ color: "black", fontSize: "15px", fontWeight: "bold"}}>{crear}</span>
               </button>
+              <br/>
+                
               {modalVisible && <FormularioTorneo onClose={closeModal} />}
               <div id="contenedor-torneos">
 
@@ -84,9 +86,11 @@ export default function PageAdmin() {
                 ))}
               </div>
             </div>
-            <button onClick={handleLogout}>Log out</button>
+            
             <p>Usuario: {email}</p>
-                <p>Rol: {rol}</p>
+            <p>Rol: {rol}</p>
+            <button onClick={handleLogout}>Log out</button>
+            
           </div>
         </div>
         </>

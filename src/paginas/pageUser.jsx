@@ -33,7 +33,7 @@ export default function PageUser() {
         //console.log("El usuario no esta logeado")
       }
       }catch(error){
-        console.log("No poseé una cuenta",error)
+        //console.log("No poseé una cuenta",error)
       }
     })
   };
@@ -52,30 +52,35 @@ export default function PageUser() {
     window.location.href = "/login";
   }
   return (
-    <div>
+    <div id="pagina-users">
       <header id="pagina-encabezado">
           <div>
-            <Menu titulo="Login" direccion="/login" nombre="Página de usuarios"/>
+            <Menu titulo="Login" direccion="/usuario" nombre="Página de usuarios"/>
           </div>
           
         </header>
       {(email && rol === "usuario") ? (
         <>
-        <div id="pagina-contenido">
-          <div id="pagina-contenido-contenedor">
+        <div id="pagina-contenido-users">
+          <div id="pagina-contenido-contenedor-users">
             <div id="contenido-torneos">
-              <div >
+              <div>
                 <span style={{ color: "black", fontSize: "15px", fontWeight: "bold"}}>{unirse}</span>
-                <p>Usuario: {email}</p>
-                <p>Rol: {rol}</p>
+                <br/>
+                <br/>
+                
               </div>
               <div id="contenedor-torneos">
                 {listaTorneos.map((torneo, index) => (
                          <TorneoUnirse key={index} dataTorneo={torneo} />
                 ))}
               </div>
+              <div >
+                <p>Usuario: {email}</p>
+                <p>Rol: {rol}</p>
+              </div>
             </div>
-            <button onClick={handleLogout}>Log out</button>
+            <button id="log-out" onClick={handleLogout}>Log out</button>
           </div>
           
         </div>

@@ -12,6 +12,94 @@
     margin-top: 100px;
     
   }
+  /*-------------------------Users-----------------------*/
+  #pagina-users{
+    width: 100%;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #e4cfb6;
+  }
+  #pagina-contenido-users{
+    display: flex;
+    justify-content: center;
+  }
+ #pagina-contenido-contenedor-users{
+  padding-top: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+ }
+ #log-out{
+  border: 2px solid #9e9e9e;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    
+    cursor: pointer;
+ }
+ #log-out:hover {
+  background-color: #b9b9b9;
+  }
+  /*************************Users************************/
+  /*-------------------------Admin-----------------------*/
+  #pagina-admin{
+    width: 100%;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #afccee;
+  }
+  #pagina-contenido-admin{
+    display: flex;
+    justify-content: center;
+    background-color: #afccee;
+  }
+ #pagina-contenido-contenedor-admin{
+  padding-top: 60px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+ }
+ #log-out{
+  border: 2px solid #9e9e9e;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    
+    cursor: pointer;
+ }
+ #log-out:hover {
+  background-color: #b9b9b9;
+  }
+  #boton-crear{
+    border-radius: 10px;
+    padding: 4px;
+    border: 2px solid #2c2c2c;
+    background-color: #8db5ea;
+    cursor: pointer;
+  }
+  #boton-crear:hover{
+    
+    background-color: #afbdee;
+  }
+  /*************************Admin************************/
   #pagina-contenido-contenedor{
     padding-top: 40px;
     width: 100%;
@@ -66,13 +154,13 @@
     align-items: center;
   }
   #contenedor-torneos{
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: center;
     align-items: start;
-    gap: 10px;
+    gap: 15px;
   }
   .modal-overlay {
     position: fixed;

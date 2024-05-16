@@ -29,33 +29,35 @@ export default function CreateTorneo({dataTorneo}) {
 
     return (    
         <div id="contenedor-torneo">
-            <div className="contenedor-title-text">
+            <div id="contenedor-torneo-image-create">
+                <div>
+                    <img id="imagen-banner" src={imagen} alt="Imagen del torneo" style={{ width: '125px', height: '100px' }} />
+                </div>
+            </div>
+            <div id="contenedor-torneo-detalle-participate">
                 <div className="title-nombre">
                     <span style={{ color: "black", fontSize: "13px", fontWeight: "bold"}}>{`Nombre del torneo: ${nombre}`}</span>
                 </div>
                 <div className="title-fecha">
                     <span style={{ color: "black", fontSize: "13px", fontWeight: "bold"}}>{`La fecha límite es: ${fechaLimite}`}</span>
                 </div>
-            </div>
-            <div>
-                <img id="imagen-banner" src={imagen} alt="Imagen del torneo" style={{ width: '125px', height: '100px' }} />
-            </div>
-            <div className="contenedor-title-text">
+            
                 <div className="title-nombre">
                     <span style={{ color: "black", fontSize: "13px", fontWeight: "bold"}}>{`Cantidad maxmima de participantes: ${cantidadMax}`}</span>
                 </div>
                 <div className="title-fecha">
                     <span style={{ color: "black", fontSize: "13px", fontWeight: "bold"}}>{`Numero de participantes actuales: ${numParticipantes}`}</span>
                 </div>
-            </div>
+            
             <div id="botones-bajos">
-                <button id="boton-agregar" onClick={openModal}>
+                <button className="boton-admin" onClick={openModal}>
                     <span style={{ color: "black", fontSize: "15px", fontWeight: "bold"}}>{modificar}</span>
                 </button>
                 {modalVisible && <ActualizarTorneo onClose={closeModal} dataTorneo={dataTorneo} />}
-                <button id="boton-agregar" onClick={handleEliminar}>
+                <button className="boton-adminE" onClick={handleEliminar}>
                     <span style={{ color: "black", fontSize: "15px", fontWeight: "bold"}}>{eliminar}</span>
                 </button>
+                </div>
             </div>
             
       </div>

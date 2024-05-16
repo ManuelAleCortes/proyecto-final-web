@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import "../componentesStyle/createTorneo.css";
-import { Link } from "react-router-dom";
+import "../componentesStyle/participateTorneo.css";
+
 import { agregarParticipanteTorneo, eliminarParticipanteTorneo, obtenerTodosLosTorneos } from "../baseDatos/metodos";
 import { dataBase } from "../baseDatos/fireBase";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,32 +36,34 @@ export default function ParticipateTorneo({dataTorneo}) {
         verificarRegistro();
       }, [listaTorneos, email]);
     return (    
-        <div id="contenedor-torneo">
-            <div className="contenedor-title-text">
-                <div className="title-nombre">
+        <div id="contenedor-torneo-participate">
+            <div id="contenedor-torneo-image-participate">
+                <div>
+                    <img id="imagen-banner-participate" src={imagen} alt="Imagen del torneo" style={{ width: '125px', height: '100px' }} />
+                </div>
+            </div>
+            <div id="contenedor-torneo-detalle-participate">
+            
+                <div className="title-nombre-participate">
                     <span style={{ color: "black", fontSize: "13px", fontWeight: "bold"}}>{`Nombre del torneo: ${nombre}`}</span>
                 </div>
-                <div className="title-fecha">
+                <div className="title-fecha-participate">
                     <span style={{ color: "black", fontSize: "13px", fontWeight: "bold"}}>{`La fecha límite es: ${fechaLimite}`}</span>
                 </div>
-            </div>
-            <div>
-                <img id="imagen-banner" src={imagen} alt="Imagen del torneo" style={{ width: '125px', height: '100px' }} />
-            </div>
-            <div className="contenedor-title-text">
-                <div className="title-nombre">
+            
+                <div className="title-nombre-participate">
                     <span style={{ color: "black", fontSize: "13px", fontWeight: "bold"}}>{`Cantidad maxmima de participantes: ${cantidadMax}`}</span>
                 </div>
-                <div className="title-fecha">
+                <div className="title-fecha-participate">
                     <span style={{ color: "black", fontSize: "13px", fontWeight: "bold"}}>{`Numero de participantes actuales: ${numParticipantes}`}</span>
+                
+                </div>
+                <div id="botones-bajos-participate">
+                    <button id="boton-registrar" onClick={handleParticipar} disabled={cantidadMax === numParticipantes && participantes.includes(email) === false} style={{ backgroundColor: registrado ? 'green' : '', color: registrado ? 'white' : 'black' }}>
+                        <span style={{ fontSize: "15px", fontWeight: "bold" }}>{registrado ? "Registrado" : "Registrarse"}</span>
+                    </button>
                 </div>
             </div>
-            <div id="botones-bajos">
-                <button onClick={handleParticipar} disabled={cantidadMax === numParticipantes && participantes.includes(email) === false} style={{ backgroundColor: registrado ? 'green' : '', color: registrado ? 'white' : 'black' }}>
-                     <span style={{ fontSize: "15px", fontWeight: "bold" }}>{registrado ? "Registrado" : "Registrarse"}</span>
-                 </button>
-            </div>
-            
       </div>
     );
 }

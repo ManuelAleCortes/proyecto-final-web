@@ -5,7 +5,7 @@ export default function NoPage() {
     <>
         <header id="pagina-encabezado">
           <div>
-            <Menu titulo="Login" direccion="/login" nombre="Página error 404"/>
+            <Menu titulo="Login" direccion="/*" nombre="Página error 404"/>
           </div>
           
         </header>

@@ -1,0 +1,46 @@
+#contenedor-torneo-participate{
+    display: flex;
+    width: 400px;
+    height: 200px;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #edbc80;
+    box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.5);
+}
+.contenedor-title-text-participate{
+    width: 100%;
+    display: flex;
+    
+}
+
+#imagen-banner-participate{
+    border-radius: 20px;
+}
+#botones-bajos-participate{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#contenedor-torneo-image-participate{
+    display: flex;
+}
+#contenedor-torneo-detalle-participate{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+}
+#boton-registrar{
+    border: 2px solid #9e9e9e;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#boton-registrar:hover {
+    background-color: #9f9f9f;
+  }
