@@ -72,12 +72,10 @@ export default function PageAdmin() {
           <>
         <div id="pagina-contenido-admin">
           <div id="pagina-contenido-contenedor-admin">
-          <div id="contenido-torneos">
-              <button id="boton-crear" onClick={openModal}>
+            <button id="boton-crear" onClick={openModal}>
                 <span style={{ color: "black", fontSize: "15px", fontWeight: "bold"}}>{crear}</span>
-              </button>
-              <br/>
-                
+            </button>
+          <div id="contenido-torneos"> 
               {modalVisible && <FormularioTorneo onClose={closeModal} />}
               <div id="contenedor-torneos">
 
@@ -89,16 +87,14 @@ export default function PageAdmin() {
             
             <p>Usuario: {email}</p>
             <p>Rol: {rol}</p>
-            <button onClick={handleLogout}>Log out</button>
+            <button id="log-out" onClick={handleLogout}>Log out</button>
             
           </div>
         </div>
         </>
         ) : (
           <>
-        <br/>
-        <br/>
-        <br/>
+
         
         <p>Usted no poseé una cuenta</p>
         

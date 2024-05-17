@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Menu from "../componentes/menu";
 import "../componentesStyle/paginas.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
-import { app, auth, dataBase} from '../baseDatos/fireBase';
-import PageUser from './pageUser';
-import {useSubmit, Form} from "react-router-dom";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import { auth, dataBase} from '../baseDatos/fireBase';
+
 import { getDoc, doc } from 'firebase/firestore';
-import { actualizarUsuario } from "../state/listaSlice";
-import { useDispatch} from 'react-redux';
+
 
 export default function Login() {
-  const dispatch = useDispatch();
+  
   const submitHandler = async (e) => {
     e.preventDefault();
       const correo = e.target.emailField.value;
@@ -26,7 +23,7 @@ export default function Login() {
           const userData = userDoc.data();
           
           if (userData) {
-            const { rol, email } = userData;
+            const { rol } = userData;
             // Redirigir basado en el rol del usuario
             
             if (rol === "administrador") {
@@ -66,7 +63,7 @@ export default function Login() {
                       <div id="form-content2"></div>
                           <label htmlFor="passwordField">contraseña</label>
                           <input type="password" id="passwordField"/>
-                      </div>
+                  </div>
 
                   <button type="submit">Iniciar sesión</button>
                   

@@ -6,14 +6,16 @@ import ActualizarTorneo from '../componentes/actualizarTorneo';
 import { dataBase } from "../baseDatos/fireBase";
 import { useState } from "react";
 export default function CreateTorneo({dataTorneo}) {
-    //const { nombre, fechaLimite, imagen, cantidadMax, numParticipantes, participantes, id } = dataTorneo;
-    const { nombre, fechaLimite, imagen, cantidadMax, numParticipantes, id } = dataTorneo;
+    const { nombre, fechaLimite, imagen, cantidadMax, numParticipantes, id, participantes} = dataTorneo;
     const [modalVisible, setModalVisible] = useState(false);
-
+    // Estado local para controlar si se muestra la lista desplegable
+    const [mostrarLista, setMostrarLista] = useState(false);
     const openModal = () => {
       setModalVisible(true);
     };
-  
+    const toggleLista = () => {
+        setMostrarLista(!mostrarLista);
+      };
     const closeModal = () => {
       setModalVisible(false);
     };
@@ -48,7 +50,18 @@ export default function CreateTorneo({dataTorneo}) {
                 <div className="title-fecha">
                     <span style={{ color: "black", fontSize: "13px", fontWeight: "bold"}}>{`Numero de participantes actuales: ${numParticipantes}`}</span>
                 </div>
-            
+                <button id="boton-lista" onClick={toggleLista}>
+                    {mostrarLista ? 'Ocultar Participantes ▲' : 'Mostrar Participantes ▼'}
+                </button>
+
+                {/* Lista desplegable */}
+                {mostrarLista && (
+                    <ul id="contenedor-lista">
+                    {participantes.map((participante, index) => (
+                    <li id="contenedor-texto" key={index}>{participante}</li>
+                    ))}
+                </ul>
+            )}
             <div id="botones-bajos">
                 <button className="boton-admin" onClick={openModal}>
                     <span style={{ color: "black", fontSize: "15px", fontWeight: "bold"}}>{modificar}</span>

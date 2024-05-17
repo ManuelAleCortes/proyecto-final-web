@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "../componentesStyle/paginas.css";
 //import { agregarTorneo } from "../state/listaSlice";
 import { useDispatch} from 'react-redux';
-import { app, auth, dataBase, imageDb} from '../baseDatos/fireBase';
+import { dataBase, imageDb} from '../baseDatos/fireBase';
 import { ref, uploadBytes , getDownloadURL} from 'firebase/storage';
 import { addTorneo, obtenerTodosLosTorneos } from "../baseDatos/metodos";
 export default function FormularioTorneo({ onClose }) {
@@ -26,7 +26,10 @@ export default function FormularioTorneo({ onClose }) {
             setError('Todos los campos son obligatorios');
             return;
           }
-
+          if (cantidadMax <= 1) {
+            setError('La cantidad maxima de participantes debe ser mayor a 1');
+            return;
+          }
           try{
             let imagenUrl = null;
             if (imagen) {

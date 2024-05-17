@@ -65,3 +65,43 @@
 .boton-adminE:hover {
     background-color: #cd6969;
 }
+#contenedor-lista{
+    margin: 0;
+    list-style-type: none;
+    padding: 0;
+    max-height: 2.3em; /* Altura máxima para aproximadamente 3 líneas (3 * 1.5em) */
+  overflow-y: auto; /* Agregar scroll vertical si excede la altura */
+}
+/*---------------------------------------------------------------------------------------------------------------------*/
+  #contenedor-lista::-webkit-scrollbar {
+    width: 8px; /* Ancho del scrollbar */
+  }
+  
+  #contenedor-lista::-webkit-scrollbar-track {
+    background: #9accff; /* Color de fondo del track */
+    border-radius: 5px; /* Bordes redondeados */
+  }
+  
+  #contenedor-lista::-webkit-scrollbar-thumb {
+    background: #6773ff; /* Color del thumb */
+    border-radius: 5px; /* Bordes redondeados */
+  }
+  
+  #contenedor-lista::-webkit-scrollbar-thumb:hover {
+    background: #4655ff; /* Color del thumb al pasar el ratón */
+  }
+/*---------------------------------------------------------------------------------------------------------------------*/
+#contenedor-texto{
+    text-align: start;
+    color: #000000;
+    font-weight: bold;
+    font-size: 13px;
+}
+#boton-lista{
+    border-radius: 5px;
+      background-color: #678aff;
+      cursor: pointer;
+}
+#boton-lista:hover{
+      background-color: #84a1ff;
+}

@@ -8,9 +8,11 @@
   }
   #pagina-contenido{
     display: flex;
-    justify-content: center;
-    margin-top: 100px;
-    
+    justify-content: start;
+    align-items: start;
+    flex-direction: row;
+    width: 100%;
+      height: 100vh;
   }
   /*-------------------------Users-----------------------*/
   #pagina-users{
@@ -20,15 +22,17 @@
       padding: 0;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: start;
       background-color: #e4cfb6;
   }
   #pagina-contenido-users{
+    padding-top: 75px;
     display: flex;
     justify-content: center;
+    background-color: #e4cfb6;
   }
  #pagina-contenido-contenedor-users{
-  padding-top: 40px;
+  
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -52,22 +56,24 @@
   /*************************Users************************/
   /*-------------------------Admin-----------------------*/
   #pagina-admin{
+    
     width: 100%;
       height: 100vh;
       margin: 0;
       padding: 0;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: start;
       background-color: #afccee;
   }
   #pagina-contenido-admin{
+    padding-top: 60px;
     display: flex;
     justify-content: center;
-    background-color: #afccee;
+    
   }
  #pagina-contenido-contenedor-admin{
-  padding-top: 60px;
+
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -89,6 +95,7 @@
   background-color: #b9b9b9;
   }
   #boton-crear{
+    margin: 20px;
     border-radius: 10px;
     padding: 4px;
     border: 2px solid #2c2c2c;
@@ -101,13 +108,13 @@
   }
   /*************************Admin************************/
   #pagina-contenido-contenedor{
-    padding-top: 40px;
+    padding-top: 150px;
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
     align-content: center;
-    align-items: center;
+    align-items: start;
   }
   #pagina-contenido-contenedor-content{
     
@@ -125,9 +132,10 @@
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    
+    padding-bottom: 10px;
   }
   #form-content1{
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -139,12 +147,16 @@
     justify-content: center;
     align-content: center;
   }
+  #form-content3{
+    padding-top: 5px;
+  }
   #form-content{
     /*background-color: blue;*/
     /*color: white;*/
     border: 2px solid rgb(94, 94, 94);
-    padding: 10px;
-    border-radius: 5px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
   }
   #contenido-torneos{
     width: 100%;
