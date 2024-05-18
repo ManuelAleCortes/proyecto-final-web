@@ -1,11 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { app, auth, dataBase} from '../baseDatos/fireBase';
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { setDoc } from 'firebase/firestore';
-import { addDoc, doc, collection, getDocs, updateDoc, deleteDoc, where, query } from "firebase/firestore";
 
-import { useDispatch} from 'react-redux';
-import { obtenerTodosLosTorneos } from "../baseDatos/metodos";
 const torneosSlice = createSlice({
     name: 'torneos',
     initialState: {

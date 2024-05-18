@@ -4,6 +4,9 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import "../componentesStyle/paginas.css";
 import { auth, dataBase} from '../baseDatos/fireBase';
 import { setDoc, doc } from 'firebase/firestore';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function Registro() {
   const [role, setRole] = useState('usuario');
 
@@ -26,10 +29,30 @@ export default function Registro() {
         rol: role,
       });
     }
+    toast.success('Usuario registrado con éxito!', {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
     // Despacha la acción después de completar la llamada a Firebase
     //console.log("Usuario registrado con exito")
   } catch (error) {
-    console.log(error);
+    //console.log(error);
+    toast.error("Hubo un error, vuelva a intentarlo", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
   }
     };
 
@@ -42,6 +65,7 @@ export default function Registro() {
           
         </header>
         <div id="pagina-contenido">
+        
           <div id="pagina-contenido-contenedor">
           <form id="form-content"  onSubmit={submitHandler}>
                 <div id="pagina-form">
@@ -78,6 +102,7 @@ export default function Registro() {
             </form>
           </div>
         </div>
+        <ToastContainer />
       </>
     );
 }

@@ -6,6 +6,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, dataBase} from '../baseDatos/fireBase';
 
 import { getDoc, doc } from 'firebase/firestore';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 export default function Login() {
@@ -31,16 +32,45 @@ export default function Login() {
             } else {
               window.location.href = "/usuario";
             }
-          
+            toast.success('Inicio de sesión con éxito!', {
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              });
           } else {
             // Manejar el caso en que no se encuentre información del usuario en Firestore
-            console.log("No se encontró información del usuario en Firestore");
+            //console.log("No se encontró información del usuario en Firestore");
+            toast.error("No se encontró información del usuario en la base de datos", {
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              });
           }
         }else{
 
         }
       }catch(error){
         //console.log(error);
+        toast.error("El usuario no se encuentra registrado en la página", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       }
 
     };
@@ -70,6 +100,7 @@ export default function Login() {
               </form>
           </div>
         </div>
+        <ToastContainer />
       </>
     );
 }
