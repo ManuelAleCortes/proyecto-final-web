@@ -5,6 +5,7 @@ import { useDispatch} from 'react-redux';
 import { dataBase, imageDb} from '../baseDatos/fireBase';
 import { ref, uploadBytes , getDownloadURL} from 'firebase/storage';
 import { addTorneo, obtenerTodosLosTorneos } from "../baseDatos/metodos";
+
 export default function FormularioTorneo({ onClose }) {
     const dispatch = useDispatch();
     
@@ -50,7 +51,17 @@ export default function FormularioTorneo({ onClose }) {
           };
           await addTorneo(dataBase,nuevoTorneo);
           //await dispatch(agregarTorneo(nuevoTorneo));
-
+          /*
+          toast.success('¡Torneo agregado con éxito!', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });*/
           // Después de agregar el torneo, obtener la lista actualizada
           dispatch(obtenerTodosLosTorneos());
           // Restablecer los campos del formulario después de enviar
@@ -71,30 +82,33 @@ export default function FormularioTorneo({ onClose }) {
   return (
     <div className="modal-overlay">
       <div className="modal">
-        <h2>Creación de un torneo</h2>
-        <form onSubmit={handleSubmit}>
+        <div>
+          <h2>Creación de un torneo</h2>
+        </div>
+        <form id="form-content-torneo" onSubmit={handleSubmit}>
             {error && <div style={{ color: 'red' }}>{error}</div>}
             <div>
                 <label>Nombre del torneo:</label>
-                <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+                <input id="nombreInput" type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} />
             </div>
             <div>
                 <label>Fecha límite:</label>
-                <input type="date" value={fechaLimite} onChange={(e) => setFechaLimite(e.target.value)} />
+                <input id="fechaLimiteInput" type="date" value={fechaLimite} onChange={(e) => setFechaLimite(e.target.value)} />
             </div>
             <div>
                 <label>Imagen:</label>
-                <input type="file" accept="image/*" onChange={handleImagenChange} />
+                <input id="imagenInput" type="file" accept="image/*" onChange={handleImagenChange} />
             </div>
             <div>
                 <label>Cantidad máxima de participantes:</label>
-                <input type="number" value={cantidadMax} onChange={(e) => setCantidadMax(parseInt(e.target.value))} />
+                <input id="cantidadMaxInput" type="number" value={cantidadMax} onChange={(e) => setCantidadMax(parseInt(e.target.value))} />
             </div>
-            <button type="submit">Guardar torneo</button>
-            <button onClick={onClose}>Cerrar</button>
+            <button id="boton-form-content-guardar" type="submit">Guardar torneo</button>
+            <button id="boton-form-content-cerrar" onClick={onClose}>Cerrar</button>
         </form>
         
       </div>
+      
     </div>
   );
 }

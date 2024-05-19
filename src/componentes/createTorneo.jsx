@@ -26,6 +26,17 @@ export default function CreateTorneo({dataTorneo}) {
     const handleEliminar = async () => {
         //await dispatch(eliminarTorneo({ id: id }));
         await removeTorneo(dataBase, id, imagen);
+        /*
+        toast.info('Se ha eliminado un torneo', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });*/
         dispatch(obtenerTodosLosTorneos());
     };
 
