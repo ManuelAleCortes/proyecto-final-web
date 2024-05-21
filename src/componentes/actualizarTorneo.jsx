@@ -6,7 +6,7 @@ import { dataBase, imageDb} from '../baseDatos/fireBase';
 import { ref, uploadBytes , getDownloadURL, deleteObject} from 'firebase/storage';
 import { obtenerTodosLosTorneos, updateTorneo } from "../baseDatos/metodos";
 
-export default function ActualizarTorneo({ onClose, dataTorneo }) {
+export default function ActualizarTorneo({ onClose, dataTorneo, showInfo }) {
     const dispatch = useDispatch();
     
     
@@ -60,6 +60,7 @@ export default function ActualizarTorneo({ onClose, dataTorneo }) {
           };
           //console.log(nuevoTorneo);
           await updateTorneo(dataBase, dataTorneo.id, nuevoTorneo);
+          showInfo();
           //await dispatch(agregarTorneo(nuevoTorneo));
           /*
           toast.info('Se ha modificado un torneo', {

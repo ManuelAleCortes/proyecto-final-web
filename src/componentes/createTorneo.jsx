@@ -5,7 +5,7 @@ import { removeTorneo, obtenerTodosLosTorneos } from "../baseDatos/metodos";
 import ActualizarTorneo from '../componentes/actualizarTorneo';
 import { dataBase } from "../baseDatos/fireBase";
 import { useState } from "react";
-export default function CreateTorneo({dataTorneo}) {
+export default function CreateTorneo({dataTorneo , showInfo}) {
     const { nombre, fechaLimite, imagen, cantidadMax, numParticipantes, id, participantes} = dataTorneo;
     const [modalVisible, setModalVisible] = useState(false);
     // Estado local para controlar si se muestra la lista desplegable
@@ -77,7 +77,7 @@ export default function CreateTorneo({dataTorneo}) {
                 <button className="boton-admin" onClick={openModal}>
                     <span style={{ color: "black", fontSize: "15px", fontWeight: "bold"}}>{modificar}</span>
                 </button>
-                {modalVisible && <ActualizarTorneo onClose={closeModal} dataTorneo={dataTorneo} />}
+                {modalVisible && <ActualizarTorneo onClose={closeModal} dataTorneo={dataTorneo} showInfo={showInfo} />}
                 <button className="boton-adminE" onClick={handleEliminar}>
                     <span style={{ color: "black", fontSize: "15px", fontWeight: "bold"}}>{eliminar}</span>
                 </button>

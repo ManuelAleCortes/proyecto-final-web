@@ -6,7 +6,7 @@ import { dataBase, imageDb} from '../baseDatos/fireBase';
 import { ref, uploadBytes , getDownloadURL} from 'firebase/storage';
 import { addTorneo, obtenerTodosLosTorneos } from "../baseDatos/metodos";
 
-export default function FormularioTorneo({ onClose }) {
+export default function FormularioTorneo({ onClose, showToast }) {
     const dispatch = useDispatch();
     
     const [nombre, setNombre] = useState('');
@@ -50,6 +50,7 @@ export default function FormularioTorneo({ onClose }) {
             participantes: [], // Inicialmente no hay participantes
           };
           await addTorneo(dataBase,nuevoTorneo);
+          showToast();
           //await dispatch(agregarTorneo(nuevoTorneo));
           /*
           toast.success('¡Torneo agregado con éxito!', {

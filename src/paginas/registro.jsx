@@ -79,7 +79,7 @@ export default function Registro() {
                     </div>
                     <div id="form-content3">
                       <label>
-                        <input
+                        <input id='pooint2'
                           type="radio"
                           value="usuario"
                           checked={role === 'usuario'}
@@ -88,7 +88,7 @@ export default function Registro() {
                         Usuario
                       </label>
                       <label>
-                        <input
+                        <input id='pooint'
                           type="radio"
                           value="administrador"
                           checked={role === 'administrador'}
@@ -98,7 +98,7 @@ export default function Registro() {
                       </label>
                     </div>
                   </div>
-                  <button type="submit">Registrarse</button>
+                  <button id='botones-principales' type="submit">Registrarse</button>
             </form>
           </div>
         </div>

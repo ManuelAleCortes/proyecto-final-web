@@ -10,6 +10,7 @@ import { useDispatch} from 'react-redux';
 import { actualizarUsuario  } from "../state/listaSlice";
 import { useEffect } from "react";
 import { obtenerTodosLosTorneos } from "../baseDatos/metodos";
+import { ToastContainer, toast } from "react-toastify";
 export default function PageAdmin() {
   const dispatch = useDispatch();
   const crear = "Crear un torneo";
@@ -25,7 +26,30 @@ export default function PageAdmin() {
     };
 
     const listaTorneos  = useSelector(state => state.torneos.listaTorneos);
-
+    const showToast = () => {
+      toast.success('¡Torneo agregado con éxito!', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    };
+    const showInfo = () => {
+      toast.info('Se ha modificado un torneo', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    };
     const fetchUserData = async (dispatch) => {
       auth.onAuthStateChanged(async(user) =>{
         try{
@@ -76,11 +100,11 @@ export default function PageAdmin() {
                 <span style={{ color: "black", fontSize: "15px", fontWeight: "bold"}}>{crear}</span>
             </button>
           <div id="contenido-torneos"> 
-              {modalVisible && <FormularioTorneo onClose={closeModal} />}
+              {modalVisible && <FormularioTorneo onClose={closeModal} showToast={showToast} />}
               <div id="contenedor-torneos">
 
                 {listaTorneos.map((torneo, index) => (
-                         <TorneoCreado key={index} dataTorneo={torneo} />
+                         <TorneoCreado key={index} dataTorneo={torneo} showInfo={showInfo} />
                 ))}
               </div>
             </div>
@@ -100,6 +124,7 @@ export default function PageAdmin() {
         
         </>
       )}
+      <ToastContainer />
       </div>
     );
 }

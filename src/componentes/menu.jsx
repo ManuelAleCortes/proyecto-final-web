@@ -33,13 +33,17 @@ export default function Menu(props) {
             setTexto("Ir al inicio");
             setDireccion("/login");
         }
-    }, []);
+    }, [props.direccion]);
+    /*<div id="title-text">
+                    <span style={{ color: "white", fontSize: "16px", fontWeight: "bold"}}>UaoTenis</span>
+                </div>*/ 
     return (
         <div id="contenedor-title">
             <div id="contenedor-title-text">
                 <div id="title-text">
-                    <span style={{ color: "white", fontSize: "14px", fontWeight: "bold"}}>{props.nombre}</span>
+                    <span style={{ color: "gray", fontSize: "14px", fontWeight: "bold"}}>{props.nombre}</span>
                 </div>
+                
                 <div>
                     <button id="log-out-menu" onClick={handleLogout}>
                         <div id="title-text">

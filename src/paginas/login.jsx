@@ -95,7 +95,7 @@ export default function Login() {
                           <input type="password" id="passwordField"/>
                   </div>
 
-                  <button type="submit">Iniciar sesión</button>
+                  <button id='botones-principales' type="submit">Iniciar sesión</button>
                   
               </form>
           </div>
