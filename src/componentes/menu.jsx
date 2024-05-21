@@ -41,7 +41,7 @@ export default function Menu(props) {
         <div id="contenedor-title">
             <div id="contenedor-title-text">
                 <div id="title-text">
-                    <span style={{ color: "gray", fontSize: "14px", fontWeight: "bold"}}>{props.nombre}</span>
+                    <span style={{ color: "white", fontSize: "14px", fontWeight: "bold"}}>{props.nombre}</span>
                 </div>
                 
                 <div>
